@@ -1,15 +1,23 @@
-
-
-
-function App() {
+import React, { useEffect, useState } from "react";
+import SearchBox from "./SearchBox";
+const App = () => {
+  let [datas, setdatas] = useState([]);
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/todos")
+      .then((res) => {
+        let data = res.json();
+        return data;
+      })
+      .then((data) => {
+        setdatas(data);
+      });
+  }, []);
 
   return (
     <>
-          <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+      <SearchBox data={datas} />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
